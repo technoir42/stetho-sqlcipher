@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+        classpath 'digital.wup:android-maven-publish:3.3.0'
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'digital.wup.android-maven-publish'
+
+group 'com.sch.stetho'
+version '1.0.0'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        informational 'GradleDependency'
+    }
+
+    libraryVariants.all {
+        it.generateBuildConfig.enabled = false
+    }
+}
+
+dependencies {
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.9'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.android
+
+            artifact sourcesJar
+        }
+    }
+}
+
+bintray {
+    user = findProperty('BINTRAY_USER')
+    key = findProperty('BINTRAY_KEY')
+    pkg {
+        repo = 'maven'
+        name = 'stetho-sqlcipher'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/technoir42/stetho-sqlcipher.git'
+        version {
+            name = project.version
+        }
+        publications = ['maven']
+    }
+}
