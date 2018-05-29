@@ -6,13 +6,7 @@ DatabaseDriver for [Stetho](https://github.com/facebook/stetho) that allows insp
 ## Usage
 
 ```
-repositories {
-    maven { url 'https://dl.bintray.com/sch/maven' }
-}
-
-dependencies {
-    implementation 'com.sch.stetho:stetho-sqlcipher:1.0.0'
-}
+debugImplementation 'com.sch.stetho:stetho-sqlcipher:1.0.0'
 ```
 
 Install the driver when initializing Stetho:
