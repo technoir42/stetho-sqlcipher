@@ -1,6 +1,8 @@
 Stetho-SQLCipher
 ================
 
+[ ![Download](https://api.bintray.com/packages/sch/maven/stetho-sqlcipher/images/download.svg) ](https://bintray.com/sch/maven/stetho-sqlcipher/_latestVersion)
+
 DatabaseDriver for [Stetho](https://github.com/facebook/stetho) that allows inspecting SQLCipher-encrypted databases.
 
 ## Usage
